@@ -1,0 +1,102 @@
+{
+  "Name": "Webstore scrape",
+  "CreationDate": "2023-2-1",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "fast",
+      "Value": "!replayspeed",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore",
+      "Description": ""
+    },
+    {
+      "Command": "prompt",
+      "Target": "Enter numbers of listings",
+      "Value": "listings",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "i",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "storeImage // xpath=//*[@id=\"product-detail-app\"]/div/div[2]/div[1]/div[2]/div[1]/div/div[1]/div/div/img",
+      "Value": "screenshot.png",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${i} <= ${listings}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//*[@id=\"layer-product-list\"]/div[2]/ol/li[${i}]/div/div[1]/a@href",
+      "Value": "!csvline",
+      "Description": "Link"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=/html/body/div[2]/main/div[4]/div[1]/div[5]/div[2]/ol/li[${i}]/div/div[2]/div[1]",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"layer-product-list\"]/div[2]/ol/li[${i}]/div/div[2]/strong/a",
+      "Value": "!csvline",
+      "Description": "Title"
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number (${i}) + 1;",
+      "Value": "i",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "if_v2 // !${!statusOK}",
+      "Value": "break",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "break // ",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "end // ",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "webstore.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "localStorageExport // screenshot.png",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}

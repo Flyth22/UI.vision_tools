@@ -1,0 +1,66 @@
+{
+  "Name": "search in source",
+  "CreationDate": "2023-2-1",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "fast",
+      "Value": "!replayspeed",
+      "Description": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "link_list.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "${!COL1}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "5000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return (window.location.href)",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!COL2}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "sourceSearch",
+      "Target": "regex=/***/i",
+      "Value": "!csvline",
+      "Description": "Change *** to your keyword"
+    },
+    {
+      "Command": "sourceSearch",
+      "Target": "regex=/***/i",
+      "Value": "!csvline",
+      "Description": "Change *** to your keyword"
+    },
+    {
+      "Command": "csvSave",
+      "Target": "checked.csv",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
