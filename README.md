@@ -5,4 +5,6 @@ Aliexpress World Scrape - Takes csv file with item IDs from Aliexpress and based
 
 Google lens links - Takes csv file with links from google lens (format is https://lens.google.com/uploadbyurl?url= + *image url*) and scrapes top results to csv file.
 
+Webstore scrape - scrapes webstore listing link, title and price. Work based on XPath.
+
 search in source - searches website source for keyword
