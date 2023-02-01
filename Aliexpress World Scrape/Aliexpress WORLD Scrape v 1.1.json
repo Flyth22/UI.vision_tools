@@ -1,0 +1,306 @@
+{
+  "Name": "Aliexpress WORLD Scrape v 1.1",
+  "CreationDate": "2023-2-1",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "fast",
+      "Value": "!replayspeed",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!csvReadLineNumber}",
+      "Value": "loop",
+      "Description": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "test_id.csv",
+      "Value": "",
+      "Description": "test_id.csv should contain only aliexpress id's in separate rows"
+    },
+    {
+      "Command": "echo",
+      "Target": "Status = ${!csvReadStatus}, line = ${!csvReadLineNumber}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!COL1}",
+      "Value": "ID",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return 1",
+      "Value": "!csvReadLineNumber",
+      "Description": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "aliexpress_world.csv",
+      "Value": "",
+      "Description": "aliexpress_world.csv contains links to all regions. You can delete some regions (except china) if you don't need them and it will still work. Make sure the first region is china"
+    },
+    {
+      "Command": "echo",
+      "Target": "Reading CSV line No.  ${!csvReadLineNumber} ",
+      "Value": "!errorIgnore",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Status = ${!csvReadStatus}, line = ${!csvReadLineNumber}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${!csvReadStatus} == \"OK\"",
+      "Value": "",
+      "Description": "It loops through every aliexpress region and scrapes data from them"
+    },
+    {
+      "Command": "echo",
+      "Target": "Reading CSV line No.  ${!csvReadLineNumber} ",
+      "Value": "!errorIgnore",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!COL1}",
+      "Value": "url",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Current URL: ${url}",
+      "Value": "!errorIgnore",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "${url}${ID}.html",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${!csvReadLineNumber} == 1",
+      "Value": "",
+      "Description": "\"If\" makes sure that firts region is chineese aliexpress (sets language to english)"
+    },
+    {
+      "Command": "pause",
+      "Target": "5000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "XClick",
+      "Target": "xpath=//*[@id=\"root\"]/div/div[2]",
+      "Value": "",
+      "Description": "The xclick is needed, because without it ui vision wont click on the element. Idk why but it works"
+    },
+    {
+      "Command": "clickAt",
+      "Target": "id=switcher-info",
+      "Value": "17,26",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"nav-global\"]/div[*]/div/div/div/div/div/a",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "type // xpath=//*[@id=\"nav-global\"]/div[*]/div/div/div/div/div/div/div/input",
+      "Value": "hong",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"nav-global\"]/div[*]/div/div/div/div/div/div/ul/li[95]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"nav-global\"]/div[*]/div/div/div/div[2]/div/span",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "linkText=English",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//button[@type='button']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "waitForPageToLoad",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return (window.location.href)",
+      "Value": "!csvline",
+      "Description": "URL"
+    },
+    {
+      "Command": "store",
+      "Target": "${!COL2}",
+      "Value": "!csvline",
+      "Description": "Currency"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${url} != \"https://aliexpress.ru/item/\"",
+      "Value": "",
+      "Description": "\"If\" makes sure that firts region is chineese aliexpress (sets language to english)"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@class=\"product-title-text\"]",
+      "Value": "!csvline",
+      "Description": "Title"
+    },
+    {
+      "Command": "pause",
+      "Target": "500",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "else",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//div/div/div/div/h1",
+      "Value": "!csvline",
+      "Description": "Title"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${!csvReadLineNumber} == 1",
+      "Value": "",
+      "Description": "it saves price and seler username only from first region to save time"
+    },
+    {
+      "Command": "storeImage",
+      "Target": "xpath=//*[@id=\"root\"]/div/div[2]/div/div[1]/div/div/div[1]",
+      "Value": "screenshot_${loop}.png",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@class=\"product-price-current\"]",
+      "Value": "price",
+      "Description": "Price"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@class='store-info-top notranslate']",
+      "Value": "username",
+      "Description": "Seller username"
+    },
+    {
+      "Command": "localStorageExport",
+      "Target": "screenshot_${loop}.png",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${price}",
+      "Value": "!csvline",
+      "Description": "Currency"
+    },
+    {
+      "Command": "store",
+      "Target": "HKD",
+      "Value": "!csvline",
+      "Description": "Currency - change the \"eur\" to whatever currency you are using"
+    },
+    {
+      "Command": "store",
+      "Target": "${ID}",
+      "Value": "!csvline",
+      "Description": "Currency"
+    },
+    {
+      "Command": "store",
+      "Target": "${username}",
+      "Value": "!csvline",
+      "Description": "Currency"
+    },
+    {
+      "Command": "store",
+      "Target": "screenshot_${loop}.png",
+      "Value": "!csvline",
+      "Description": "Currency"
+    },
+    {
+      "Command": "csvSave",
+      "Target": "IMC.csv",
+      "Value": "",
+      "Description": "Everything will be saved to this csv. Name it however you like, ui vision will create a new one if it doesn't exist yet"
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number(${!csvReadLineNumber})+1",
+      "Value": "!csvReadLineNumber",
+      "Description": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "aliexpress_world.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}

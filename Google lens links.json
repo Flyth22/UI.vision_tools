@@ -1,0 +1,132 @@
+{
+  "Name": "Google lens links",
+  "CreationDate": "2023-2-1",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "fast",
+      "Value": "!replayspeed",
+      "Description": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "scrapeimage.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "10",
+      "Value": "!timeout_pageload",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "open // ",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "${!COL1}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "i",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!COL1}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!COL2}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${i} < 5",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "x",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!statusOK",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${!statusOK}==true",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "2",
+      "Value": "!timeout_wait",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=//div/div/div[${i}]/div[${x}]/a@href",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number (${x}) + 1;",
+      "Value": "xi",
+      "Description": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "${i}${x}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number (${i}) + 1;",
+      "Value": "i",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Scraped.csv",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
